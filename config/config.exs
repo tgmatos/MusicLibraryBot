@@ -1,10 +1,10 @@
 import Config
 
 config :telegram_bot,
-       name: ""
+  name: ""
 
 config :nadia,
-       token: "",
-       recv_timeout: 10
+  token: "",
+  recv_timeout: 10
 
-#import_config "#{config_env()}.exs"
+# import_config "#{config_env()}.exs"

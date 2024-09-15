@@ -10,7 +10,7 @@ defmodule Bot.Database do
   def exec_query(worker, query) do
     GenServer.call(via_tuple(worker), {:query, query})
   end
-  
+
   @impl true
   def init(_) do
     Logger.info("Starting Bot.Database")
@@ -28,6 +28,7 @@ defmodule Bot.Database do
   @impl true
   def handle_call({:query, query}, _, state) do
     %{connection: conn} = state
+
     result =
       get_data(conn, query)
       |> Enum.map(fn entry ->
@@ -46,14 +47,14 @@ defmodule Bot.Database do
     """
 
     like = "%#{query}%"
-        
+
     {:ok, statement} = Sqlite3.prepare(conn, sql)
     :ok = Sqlite3.bind(conn, statement, [like])
     {:ok, data} = Sqlite3.fetch_all(conn, statement)
 
     data
   end
-  
+
   defp via_tuple(count) do
     Bot.Registry.via_tuple({__MODULE__, count})
   end

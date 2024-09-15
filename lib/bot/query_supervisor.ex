@@ -1,6 +1,6 @@
 defmodule Bot.QuerySupervisor do
   require Logger
-    
+
   def start_link() do
     Logger.info("Starting Bot.QuerySupervisor")
     DynamicSupervisor.start_link(name: __MODULE__, strategy: :one_for_one)
@@ -17,5 +17,4 @@ defmodule Bot.QuerySupervisor do
       type: :supervisor
     }
   end
-
 end

@@ -15,10 +15,11 @@ defmodule Bot.QueryHandler do
   def init(_) do
     {:ok, :ok}
   end
-  
+
   @impl GenServer
   def handle_cast({:query, {inline_query_id, query}}, state) do
     _ = state
+
     results =
       Bot.DatabaseSupervisor.route_query(query)
       |> Enum.map(fn entry ->
